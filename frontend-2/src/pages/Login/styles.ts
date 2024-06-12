@@ -32,6 +32,7 @@ export const LoginFormContainer = styled.form`
     background: ${props => props.theme["blue-1100"]};
     border: 1px solid ${props => props.theme["blue-950"]};
     border-radius: 8px;
+    color: ${props => props.theme["blue-50"]};
   }
 
   ::placeholder {
