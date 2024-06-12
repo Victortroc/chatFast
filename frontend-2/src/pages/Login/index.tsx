@@ -1,5 +1,7 @@
-import { FormButton, FormContainer, LoginContainer } from "./styles";
+import { ButtonGoogle, LoginContainer, LoginFormButton, LoginFormContainer, SecondContainer } from "./styles";
 import ChatLogoBranca from "../../assets/chatlogo-branca.png"
+import GoogleLogo from "../../assets/google-logo.svg"
+import { Link } from "react-router-dom";
 
 export function Login() {
   return (
@@ -7,7 +9,7 @@ export function Login() {
       <img src={ChatLogoBranca} alt="" />
 
       <h1>Entrar</h1>
-      <FormContainer /*onSubmit={handleSubmit}*/>
+    <LoginFormContainer /*onSubmit={handleSubmit}*/>
       <span>Email</span>
       <input
         type="email"
@@ -15,15 +17,25 @@ export function Login() {
         // onChange={(e) => setEmail(e.target.value)}
         placeholder="Digite seu email"
       />
-      <span>Senha</span>
+      <span>Senha <a href="#">Esqueceu a senha?</a></span>
       <input
         type="password"
         // value={password}
         // onChange={(e) => setPassword(e.target.value)}
         placeholder="Digite sua senha"
       />
-      <FormButton>Login</FormButton>
-    </FormContainer>
+      <LoginFormButton>Login</LoginFormButton>
+    </LoginFormContainer>
+
+    <SecondContainer>
+      <p>Não possui uma conta? <Link to='/register'>Registre-se</Link></p>
+      <span>ou</span>
+
+      <ButtonGoogle>
+        <img src={GoogleLogo} alt="" />
+        Entrar com Google
+      </ButtonGoogle>
+    </SecondContainer>
     </LoginContainer>
   )
 }
