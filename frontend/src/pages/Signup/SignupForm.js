@@ -5,13 +5,11 @@ const SignupForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userId, setUserId] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:4444/signup', {
-        userId,
         username,
         email,
         password
@@ -24,12 +22,7 @@ const SignupForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            placeholder="useId"
-        />
+
         <input
             type="text"
             value={username}
