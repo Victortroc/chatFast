@@ -1,15 +1,19 @@
 import openSocket from "socket.io-client";
 import { isObject } from "lodash";
 
+// const apiBackend = import.meta.env.VITE_BACKEND;
+const apiBackend = import.meta.env.VITE_BACKEND;
+
 export function socketConnection(params) {
-  let user = null;
-  if (localStorage.getItem("user")) {
-    user = localStorage.getItem("user");
-  }
-  return openSocket(process.env.REACT_APP_BACKEND_URL, {
+  // let userId = null;
+  // if (localStorage.getItem("userId")) {
+  //   userId = localStorage.getItem("userId");
+  // }
+  return openSocket(apiBackend, {
     transports: ["websocket", "polling", "flashsocket"],
     pingTimeout: 18000,
     pingInterval: 18000,
-    query: isObject(params) ? { ...params, user } : { user },
+    // query: isObject(params) ? { ...params, userId } : { userId }
+    query: params
   });
-};
+}
