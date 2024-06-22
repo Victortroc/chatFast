@@ -28,11 +28,11 @@ app.use(cors({
 }));
 
 // Servir a versão de produção do frontend
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 // Redirecionar todas as requisições para o frontend
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Proxy para WebSocket
@@ -42,6 +42,6 @@ server.on("upgrade", (req, socket, head) => {
   proxy.ws(req, socket, head);
 });
 
-server.listen(3333, () => {
-  console.log("Servidor rodando na porta 3333");
+server.listen(5173, () => {
+  console.log("Servidor rodando na porta 5173");
 });
