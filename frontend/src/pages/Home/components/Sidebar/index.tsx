@@ -5,10 +5,8 @@ import { socketConnection } from "../../../../services/socket";
 import { HeaderDetails, HeaderLogo, ItemsContainer, ItemsContainerTop, ItemsHeader, LogoutBtn, OpenBtn, SideBarContainer, SidebarNav } from "./styles";
 import profileImg from "../../../../assets/profile-image.png"
 import { Bell, BookmarkSimple, CaretRight, EnvelopeSimple, Hash, House, SignOut, Users } from "phosphor-react";
-import { useState } from "react";
 
-export function Sidebar() {
-  const [isHover, setIsHover] = useState(false);
+export function Sidebar({ isHover, setIsHover }) {
   const { handleLogout } = useContext(AuthContext);
 
   const socketRef = useRef(null);
