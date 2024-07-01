@@ -28,11 +28,11 @@ app.use(cors({
 }));
 
 // Servir a versão de produção do frontend
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 // Redirecionar todas as requisições para o frontend
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Proxy para WebSocket
