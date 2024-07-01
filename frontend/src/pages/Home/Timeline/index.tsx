@@ -1,4 +1,5 @@
 import { NewPost, NewPostButton, NewPostInput, TimeLine, TimeLineHeader, TimeLineMain } from "./styles";
+import { Post } from "../components/Post/index"
 import profileImg from "../../../assets/profile-image.png"
 
 export function Timeline() {
@@ -18,6 +19,8 @@ export function Timeline() {
               Postar
             </NewPostButton>
           </NewPost>
+
+          <Post />
         </TimeLineMain>
       </TimeLine>
   )
