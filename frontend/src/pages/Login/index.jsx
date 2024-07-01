@@ -33,7 +33,6 @@ export function Login() {
         await sleep(2000);
         await handleLogin({ email, password });
         setLoading(false);
-
       } else {
         toast.error("Preencha os campos!");
         setLoading(false);
@@ -57,7 +56,7 @@ export function Login() {
           onChange={handleEmailChange}
         />
         <span>
-          Senha <a href="#">Esqueceu a senha?</a>
+          Senha <Link to='/'>Esqueceu a senha?</Link>
         </span>
         <input
           type="password"
@@ -66,7 +65,8 @@ export function Login() {
           onChange={handlePasswordChange}
         />
 
-        {loading ? (<LoginFormButton $disable="true">Logando...</LoginFormButton>) : (<LoginFormButton onClick={handleButtonClick}>Login</LoginFormButton>)}
+        {loading ? (<LoginFormButton $disable="true">Logando...</LoginFormButton>) : 
+        (<LoginFormButton onClick={handleButtonClick}>Login</LoginFormButton>)}
         
       </LoginFormContainer>
       <SecondContainer>

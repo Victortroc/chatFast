@@ -42,6 +42,6 @@ server.on("upgrade", (req, socket, head) => {
   proxy.ws(req, socket, head);
 });
 
-server.listen(3333, () => {
-  console.log("Servidor rodando na porta 3333");
+server.listen(5173, () => {
+  console.log("Servidor rodando na porta 5173");
 });
