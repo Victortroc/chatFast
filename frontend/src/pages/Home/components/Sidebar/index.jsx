@@ -1,8 +1,8 @@
 import { useEffect, useRef, useContext } from "react";
 import { AuthContext } from "../../../../context/Auth/AuthContext.jsx";
 import { toast } from "react-toastify";
-import { socketConnection } from "../../../../services/socket";
-import { HeaderDetails, HeaderLogo, ItemsContainer, ItemsContainerTop, ItemsHeader, LogoutBtn, OpenBtn, SideBarContainer, SidebarNav } from "./styles";
+import { socketConnection } from "../../../../services/socket.js";
+import { HeaderDetails, HeaderLogo, ItemsContainer, ItemsContainerTop, ItemsHeader, LogoutBtn, OpenBtn, SideBarContainer, SidebarNav } from "./styles.ts";
 import profileImg from "../../../../assets/profile-image.png"
 import { Bell, BookmarkSimple, CaretRight, EnvelopeSimple, Hash, House, SignOut, Users } from "phosphor-react";
 
@@ -10,22 +10,21 @@ export function Sidebar({ isHover, setIsHover }) {
   const { handleLogout } = useContext(AuthContext);
 
   const socketRef = useRef(null);
-  const storedUser = localStorage.getItem("user");
+  const storedUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
   
     if (storedUser) {
-      const user = JSON.parse(storedUser);
 
       if (!socketRef.current) {
-        socketRef.current = socketConnection(user);
+        socketRef.current = socketConnection(storedUser);
         console.log("Socket connected");
 
-        socketRef.current.on(`user-${user.id}-auth`, (data) => {
-          if (data.action === "update" && data.user.id === user.id) {
+        socketRef.current.on(`user-${storedUser.id}-auth`, (data) => {
+          if (data.action === "update" && data.user.id === storedUser.id) {
             console.log("Received user update:", data.user);
           }
-          if (data.user.id === user.id) {
+          if (data.user.id === storedUser.id) {
             alert('Sua conta foi acessada em outro computador.');
             localStorage.clear();
             window.location.reload();
@@ -70,8 +69,8 @@ export function Sidebar({ isHover, setIsHover }) {
             </HeaderLogo>
               
             <HeaderDetails>
-              <span>Joãozinho</span>
-              <span>joaozinho@gmail.com</span>
+              <span>{storedUser.username}</span>
+              <span>{storedUser.email}</span>
             </HeaderDetails>
           </ItemsHeader>
 

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PostContainer = styled.div`
   display: flex;
@@ -9,18 +9,35 @@ export const PostContainer = styled.div`
   gap: 1.25rem;
   padding: 1rem 0.5rem;
   background-color: ${props => props.theme["blue-1000"]};
+  transform: translateX(100px);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 
-  img {
+  img.profile {
     height: 32px;
     width: 32px;
+    border-radius: 50%;
   }
+
+  ${props => props.$show && css`
+    transform: translateX(0);
+    opacity: 1;
+  `}
 `;
 
 export const PostContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  gap: 1rem ;
+  gap: 1rem;
+
+  /* Novo estilo para imagens de mídia */
+  img.media {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
 `;
 
 export const Username = styled.div`
@@ -29,7 +46,7 @@ export const Username = styled.div`
   gap: 0.25rem;
 
   span {
-    font-size: 14;
+    font-size: 14px;
     color: ${props => props.theme["blue-400"]};
   }
 `;
@@ -48,4 +65,9 @@ export const PostButtonContainer = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+`;
+
+export const PostShow = css`
+  transform: translateX(0);
+  opacity: 1;
 `;
