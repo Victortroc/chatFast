@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Sidebar } from "../../pages/Home/components/Sidebar";
-import { DefaultLayoutContainer } from "./styles";
+import { DefaultLayoutContainer, PageHome } from "./styles";
 import { Timeline } from "../../pages/Home/Timeline";
 import { FormSubmit } from "../../pages/Home/components/FormSubmit";
 
@@ -16,8 +16,11 @@ export function DefaultLayout() {
   return (
     <DefaultLayoutContainer data-state={`sidebar-${isHover ? "active" : ""}`}>
       <Sidebar isHover={isHover} setIsHover={setIsHover} />
+      <PageHome>
       <FormSubmit addNewPost={addNewPost} />
       <Timeline newInputPosts={newInputPosts} />
+      </PageHome>
+      
     </DefaultLayoutContainer>
   )
 }

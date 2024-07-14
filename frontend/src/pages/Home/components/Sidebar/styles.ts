@@ -36,7 +36,7 @@ export const SideBarContainer = styled.aside`
   width: 75px;
   background-color: ${props => props.theme["blue-900"]};
   color: ${props => props.theme["blue-50"]};
-  position: relative;
+  position: fixed;
   transition: width 1.25s ease-in;
 
   svg {

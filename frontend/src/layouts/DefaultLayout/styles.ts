@@ -10,3 +10,7 @@ export const DefaultLayoutContainer = styled.div`
   }
 `;
 
+export const PageHome = styled.div`
+  grid-column-start: 2;
+`;
+
