@@ -1,47 +1,27 @@
-import express from "express";
-import cors from "cors";
-import path from "path";
-import httpProxy from "http-proxy";
-import { createServer } from "http";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-import dotenv from "dotenv";
-
-
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
-const proxy = httpProxy.createProxyServer({
-    target: process.env.VITE_BACKEND, // URL do backend
-    ws: true,
+
+// Resolve __dirname para módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// Configurar CORS
-app.use(cors({
-    origin: process.env.VITE_FRONTEND, // URL do frontend
-    //   methods: ["GET", "POST", "DELETE", "UPDATE"],
-    methods: "*",
-    credentials: true
-}));
-
-// Servir a versão de produção do frontend
-app.use(express.static(path.join(__dirname, "dist")));
-
-// Redirecionar todas as requisições para o frontend
-app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    } else {
+      next();
+    }
 });
 
-// Proxy para WebSocket
-const server = createServer(app);
-
-server.on("upgrade", (req, socket, head) => {
-  proxy.ws(req, socket, head);
-});
-
-server.listen(5173, () => {
-  console.log("Servidor rodando na porta 5173");
+app.listen(3333, () => {
+  console.log('Servidor rodando na porta 3333');
 });

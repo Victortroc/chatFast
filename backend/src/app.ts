@@ -22,4 +22,12 @@ app.use("/public", express.static(uploadConfig.directory));
 
 app.use(routes);
 
+app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    } else {
+      next();
+    }
+});
+
 export default app;
